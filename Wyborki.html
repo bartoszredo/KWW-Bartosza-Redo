@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Głosuj na Przyszłego Premiera!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@400;700&display=swap');
+
+        :root {
+            --presidential-blue: #0A3161; 
+            --accent-red: #B31942;      
+            --light-background: #F8F9FA;
+            --dark-text: #212529;         
+            --white-color: #ffffff;
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-strong: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--light-background);
+            color: var(--dark-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Nagłówek */
+        header {
+            background: var(--white-color);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #dee2e6;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--presidential-blue);
+            text-decoration: none;
+        }
+
+        header .logo span {
+            color: var(--accent-red);
+        }
+
+        /* Sekcja Hero */
+        .hero {
+            padding: 8rem 0;
+            text-align: center;
+            color: var(--white-color);
+            background: linear-gradient(rgba(10, 49, 97, 0.85), rgba(10, 49, 97, 0.85)), url('https://images.unsplash.com/photo-1503104538342-4261b1cfee43?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '★ ★ ★';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 1.5rem;
+            letter-spacing: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        /* NOWA SEKCJA O KANDYDACIE Z MIEJSCEM NA PLAKAT */
+        .about-section {
+            padding: 6rem 0;
+            background: var(--white-color);
+        }
+        
+        .about-section .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .about-poster {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        .about-poster img {
+            width: 100%;
+            display: block;
+            border-radius: 8px; /* Lekko zaokrąglone rogi dla estetyki */
+            box-shadow: var(--shadow-strong);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .about-poster img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .about-text {
+            flex: 1.2; /* Daję trochę więcej miejsca na tekst */
+            min-width: 300px;
+        }
+        
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--presidential-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .about-text .slogan {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* Sekcja Program Wyborczy */
+        .program-section {
+            padding: 6rem 0;
+        }
+
+        .program-section .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+            color: var(--presidential-blue);
+            position: relative;
+        }
+
+        .program-section .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent-red);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .program-item {
+            background: var(--white-color);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease-in-out;
+            border-top: 5px solid var(--presidential-blue);
+        }
+
+        .program-item:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .program-item .icon {
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--presidential-blue);
+            margin-bottom: 0.75rem;
+        }
+
+        /* NOWA SEKCJA CTA Z DWOMA PRZYCISKAMI */
+        .cta-section {
+            padding: 6rem 0;
+            text-align: center;
+            background: var(--presidential-blue);
+            color: var(--white-color);
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            opacity: 0.9;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Aby przyciski przenosiły się do nowej linii na małych ekranach */
+        }
+
+        .social-btn { /* Wspólna klasa dla obu przycisków */
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--presidential-blue);
+            background-color: var(--white-color);
+            padding: 18px 36px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: var(--shadow-strong);
+            border: 2px solid var(--white-color);
+        }
+        
+        .social-btn:hover {
+            background-color: transparent;
+            color: var(--white-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .social-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* Stopka */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            background: var(--dark-text);
+            color: var(--light-background);
+        }
+        
+        footer .container p {
+            margin-bottom: 1rem;
+        }
+        
+        footer .paid-for {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Animacje przy przewijaniu */
+        .reveal {
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsywność */
+        @media(max-width: 992px) {
+            .program-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media(max-width: 768px) {
+            .program-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .about-section .container {
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">REDO<span>.</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container reveal">
+                <h1>Zagłosuj na mnie już za</h1>
+				
+				<div id="countdown" style="font-size: 2rem; margin-top: 0.5rem; font-weight: 700;"></div>
+
+                <p>Głosuj na Przyszłego Premiera!</p>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container reveal">
+                <div class="about-poster">
+                    <img src="Plakat.png" alt="Plakat wyborczy">
+                </div>
+                <div class="about-text">
+                    <h2>O Bartoszu Redo</h2>
+                    <strong class="slogan">Najlepszy Kandydat</strong>
+                    <p>Jestem zwolennikiem nowoczesnej, europejskiej Polski, w której kluczową rolę odgrywa wolny rynek i odpowiedzialna polityka gospodarcza. Wspieram idee liberalne i wierzę, że przyszłość naszego kraju zależy od odważnych reform – deregulacji, upraszczania prawa i tworzenia warunków sprzyjających rozwojowi przedsiębiorczości. Opowiadam się za wprowadzeniem euro w Polsce, co pozwoli nam jeszcze mocniej zakotwiczyć się w europejskiej wspólnocie i zwiększyć stabilność naszej gospodarki. Uważam, że państwem powinni kierować kompetentni, dobrze przygotowani ludzie, którzy decyzje opierają na wiedzy i rozmowach, a nie populizmie.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="program" class="program-section">
+            <div class="container">
+                <h2 class="section-title reveal">Mój program wyborczy</h2>
+                <div class="program-grid">
+                    <div class="program-item reveal" style="transition-delay: 100ms;">
+  <div class="icon">📚</div>
+  <h3>Elastyczne zasady pracy ucznia</h3>
+  <p>System dwóch nieprzygotowań na przedmiotach podstawowych i trzech na rozszerzeniach umożliwi uczniom lepsze zarządzanie czasem i postawienie na priorytety.</p>
+</div>
+
+<div class="program-item reveal" style="transition-delay: 200ms;">
+  <div class="icon">📅</div>
+  <h3>Weekend bez zadań</h3>
+  <p>Koniec z pracami domowymi na poniedziałek. Weekend to czas regeneracji, a nie przedłużenie szkolnego tygodnia. Wyjątkiem są przedmioty odbywające się tylko raz w tygodniu.</p>
+</div>
+
+<div class="program-item reveal" style="transition-delay: 300ms;">
+  <div class="icon">⚖️</div>
+  <h3>Ocena wiedzy, nie zachowania</h3>
+  <p>Po ściąganiu nie stawiamy jedynki bez możliwości poprawy – tylko drugi termin i rzetelna ocena wiedzy. Bo szkoła ma wychowywać, nie karać.  
+  <br><br><em>Podstawa prawna: art. 44b ust. 3 ustawy o systemie oświaty – ocenianie dotyczy osiągnięć edukacyjnych, nie zachowania ucznia podczas sprawdzianu.</em></p>
+</div>
+
+<div class="program-item reveal" style="transition-delay: 400ms;">
+  <div class="icon">💶</div>
+  <h3>Euro w Polsce</h3>
+  <p>Przygotowanie Polski do przyjęcia wspólnej waluty przez spełnienie kryteriów konwergencji. Stabilność, tańsze kredyty, łatwiejsze podróże i inwestycje.</p>
+</div>
+
+<div class="program-item reveal" style="transition-delay: 500ms;">
+  <div class="icon">🚫</div>
+  <h3>Stop absurdom podatkowym</h3>
+  <p>Likwidacja niepotrzebnych podatków jak Belki, danina solidarnościowa, podatek od darowizn i „deszczu”. Polacy powinni być wolni, nie dojeni przez fiskusa.</p>
+</div>
+
+<div class="program-item reveal" style="transition-delay: 600ms;">
+  <div class="icon">💸</div>
+  <h3>Kwota wolna = 12×MIN</h3>
+  <p>Ustawienie kwoty wolnej od PIT na poziomie 12-krotności minimalnego wynagrodzenia. To sprawiedliwe i motywujące rozwiązanie dla wszystkich pracujących.</p>
+</div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container reveal">
+                <h2>Dołącz do Mnie</h2>
+                <p>Śledź moją kampanię w social mediach!</p>
+                <div class="social-buttons">
+                    <a href="https://www.instagram.com/bartek_redo" target="_blank" class="social-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                        <span>Obserwuj @bartek_redo</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@bartekredo" target="_blank" class="social-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 122.8 122.8V209.9z"/></svg>
+                        <span>Zobacz na TikToku</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 KOMITET WYBORCZY WYBORCÓW BARTOSZA REDO</p>
+            <p class="paid-for">SFINANSOWANO PRZEZ KWW BARTOSZA REDO</p>
+        </div>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    </script>
+	
+	<script>
+    // Docelowa data i godzina: 1 września 2025, 08:00
+    const targetDate = new Date("2025-09-01T08:00:00");
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+            document.getElementById("countdown").textContent = "Wybory się rozpoczęły!";
+            clearInterval(intervalId);
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("countdown").textContent = 
+            `${days} dni ${hours} godz. ${minutes} min ${seconds} sek`;
+    }
+
+    updateCountdown();
+    const intervalId = setInterval(updateCountdown, 1000);
+	</script>
+
+</body>
+</html>
